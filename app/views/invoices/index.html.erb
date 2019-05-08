@@ -1,5 +1,12 @@
 <div class="container">
   <center><h1>Lists of invoices</h1></center>
+  <%= form_tag invoices_path, method: :get do%>
+    <%=label_tag :from%>
+    <%= text_field_tag :from, '', class: 'datepicker', require: true%>
+    <%=label_tag :to%>
+    <%= text_field_tag :to, '', class: 'datepicker', required: true%>
+    <button type="submit" class="btn btn-default">Filter</button>
+  <%end%>
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -23,3 +30,14 @@
     </tbody>
   </table>  
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+      format: 'dd-mm-yyyy',
+      autoclose:true,
+      endDate: "today",
+      maxDate: "today"    
+    });
+  }); 
+</script>
