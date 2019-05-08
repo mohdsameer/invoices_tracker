@@ -20,10 +20,20 @@ class InvoicesController < ApplicationController
     end
   end
 
-  def update
+  def show
   end
 
-  def show
+  def edit
+  end
+
+  def update
+    if @invoice.update(invoice_params)
+      flash[:notice] = "Invoice updated successfully"
+      redirect_to invoices_path
+    else
+      flash[:notice] = @invoice.errors.full_messages.to_sentence
+      render action: "edit"
+    end    
   end
 
   def destroy

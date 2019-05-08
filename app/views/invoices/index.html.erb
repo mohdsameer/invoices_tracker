@@ -1,23 +1,25 @@
-<h1>Welcome</h1>
-<%= link_to "New Invoice", new_invoice_path %>
-
-<% if @invoices.present? %>
-  <table>
-    <thead>
+<div class="container">
+  <center><h1>Lists of invoices</h1></center>
+  <table class="table">
+    <thead class="thead-dark">
       <tr>
-        <th>#</th>
-        <th>Amount</th>
-        <th>Date</th>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Amount</th>
       </tr>
     </thead>
     <tbody>
-      <% @invoices.each_with_index do |invoice, index| %>
-      <tr>
-        <td><%= index+1 %></td>
-        <td><%= invoice.amount %></td>
-        <td><%= invoice.invoice_date %></td>
-      </tr>
-      <% end %>
+      <%unless @invoices.blank?%>
+        <%@invoices.each_with_index do |invoice, index|%>
+          <tr>
+            <th scope="row"><%=index +1%></th>
+            <td><%=invoice.invoice_date.strftime("%d %b, %Y")%></td>
+            <td><%=invoice.amount%></td>
+            <td><%= link_to 'Edit', edit_invoice_path(invoice), class: 'btn btn-primary'%></td>
+            <td><%= link_to 'Destroy', invoice_path(invoice), method: :delete, class: 'btn btn-danger'%></td>
+          </tr>
+        <%end%>
+      <%end%>
     </tbody>
-  </table>
-<% end %>
+  </table>  
+</div>
