@@ -3,7 +3,7 @@ class Invoice < ApplicationRecord
     self.where("invoice_date BETWEEN ? AND ?", from, to)
   end
 
-  def total
+  def self.total
     self.sum(:amount)
   end
 end

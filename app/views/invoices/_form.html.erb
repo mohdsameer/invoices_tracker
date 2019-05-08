@@ -3,11 +3,11 @@
 	<%= form_for @invoice do |f| %>
 	  <div class="form-group">
 	    <%= f.label :amount %>
-	    <%= f.number_field :amount, step: :any, required: true, class: 'form-control' %>
+	    <%= f.number_field :amount, step: :any, required: true, class: 'form-control', autocomplete: 'off' %>
 	  </div>
 	  <div class="form-group">
 	    <%= f.label :invoice_date %>
-	    <%= f.text_field :invoice_date, value: f.object.invoice_date.strftime("%d-%m-%Y"), required: true, class: 'form-control datepicker' %>
+	    <%= f.text_field :invoice_date, value: f.object.invoice_date.present? ? f.object.invoice_date.strftime("%d-%m-%Y") : nil, required: true, class: 'form-control datepicker', autocomplete: 'off' %>
 	  </div>
 	  <button type="submit" class="btn btn-default">Submit</button>
 	<% end %>

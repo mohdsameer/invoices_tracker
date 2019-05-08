@@ -1,16 +1,16 @@
 <div class="container">
   <center><h1>Lists of invoices</h1></center>
   <%= link_to "New Invoice", new_invoice_path, class: 'btn btn-success' %>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Date</th>
-        <th scope="col">Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%unless @invoices.blank?%>
+  <%unless @invoices.blank?%>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Date</th>
+          <th scope="col">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
         <%@invoices.each_with_index do |invoice, index|%>
           <tr>
             <th scope="row"><%=index +1%></th>
@@ -20,7 +20,11 @@
             <td><%= link_to 'Destroy', invoice_path(invoice), method: :delete, class: 'btn btn-danger'%></td>
           </tr>
         <%end%>
-      <%end%>
-    </tbody>
-  </table>  
+      </tbody>
+    </table>
+    <div class="total" style="text-align: right;">
+      <%= label_tag :total %>
+      <%= @invoices.total %>
+    </div>
+  <%end%>
 </div>
