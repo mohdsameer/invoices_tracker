@@ -14,6 +14,7 @@
 //= require jquery-ui
 //= require bootstrap.min
 //= require rails-ujs
+//= require bootstrap-datepicker
 //= require toastr_rails
 //= require activestorage
 //= require turbolinks
