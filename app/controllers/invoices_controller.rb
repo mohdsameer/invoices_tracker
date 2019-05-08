@@ -9,7 +9,7 @@ class InvoicesController < ApplicationController
     if params[:from].present? && params[:to].present?
       @invoices = Invoice.filter(params[:from].to_date, params[:to].to_date)
     else
-      @invoices = Invoice.all
+      @invoices = Invoice.all.order('invoice_date DESC')
     end
     @total = Invoice.total_for(@invoices.pluck(:id))
   end
