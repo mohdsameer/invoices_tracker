@@ -1,17 +1,14 @@
-<div class="container">
-	<div style="width: 600px; margin: 0 auto;">
-	<%= form_for @invoice do |f| %>
-	  <div class="form-group">
-	    <%= f.label :amount %>
-	    <%= f.number_field :amount, step: :any, required: true, class: 'form-control', autocomplete: 'off' %>
-	  </div>
-	  <div class="form-group">
-	    <%= f.label :invoice_date %>
-	    <%= f.text_field :invoice_date, value: f.object.invoice_date.present? ? f.object.invoice_date.strftime("%d-%m-%Y") : nil, required: true, class: 'form-control datepicker', autocomplete: 'off' %>
-	  </div>
-	  <button type="submit" class="btn btn-default">Submit</button>
-	<% end %>
-</div>
+<%= form_for @invoice do |f| %>
+  <div class="form-group">
+    <%= f.label :amount %>
+    <%= f.number_field :amount, step: :any, required: true, class: 'form-control', autocomplete: 'off' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :invoice_date %>
+    <%= f.text_field :invoice_date, value: f.object.invoice_date.present? ? f.object.invoice_date.strftime("%d-%m-%Y") : nil, required: true, class: 'form-control datepicker', autocomplete: 'off' %>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+<% end %>
 
 <script type="text/javascript">
   $(document).ready(function(){
