@@ -7,8 +7,19 @@
 	  </div>
 	  <div class="form-group">
 	    <%= f.label :invoice_date %>
-	    <%= f.date_field :invoice_date, required: true, class: 'form-control' %>
+	    <%= f.text_field :invoice_date, value: f.object.invoice_date.strftime("%d-%m-%Y"), required: true, class: 'form-control datepicker' %>
 	  </div>
 	  <button type="submit" class="btn btn-default">Submit</button>
 	<% end %>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+			format: 'dd-mm-yyyy',
+			autoclose:true,
+			endDate: "today",
+			maxDate: "today"  	
+    });
+  });	
+</script>
