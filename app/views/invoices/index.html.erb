@@ -2,10 +2,11 @@
   <center><h1>Lists of invoices</h1></center>
   <%= form_tag invoices_path, method: :get do%>
     <%=label_tag :from%>
-    <%= text_field_tag :from, '', class: 'datepicker', require: true%>
+    <%= text_field_tag :from, params[:from].present? ? params[:from].to_date.strftime("%d-%m-%Y") : nil, class: 'datepicker', require: true%>
     <%=label_tag :to%>
-    <%= text_field_tag :to, '', class: 'datepicker', required: true%>
+    <%= text_field_tag :to, params[:to].present? ? params[:to].to_date.strftime("%d-%m-%Y") : nil, class: 'datepicker', required: true%>
     <button type="submit" class="btn btn-default">Filter</button>
+    <%= link_to "New Invoice", new_invoice_path, class: 'btn btn-success' %>
   <%end%>
   <table class="table">
     <thead class="thead-dark">

@@ -6,7 +6,12 @@ class InvoicesController < ApplicationController
   end
 
   def index
-    @invoices = Invoice.all
+    if params[:from].present? && params[:to].present?
+      @invoices = Invoice.filter(params[:from].to_date, params[:to].to_date)
+    else
+      @invoices = Invoice.all
+    end
+    @total = Invoice.total_for(@invoices.pluck(:id))
   end
 
   def create
