@@ -1,0 +1,7 @@
+<%= form_for @invoice do |f| %>
+  <%= f.label :amount %>
+  <%= f.number_field :amount, step: :any, required: true %>
+  <%= f.label :invoice_date %>
+  <%= f.date_field :invoice_date, required: true %>
+  <%= f.submit %>
+<% end %>
