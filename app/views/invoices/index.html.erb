@@ -2,9 +2,9 @@
   <center><h1>Lists of invoices</h1></center>
   <%= form_tag invoices_path, method: :get do%>
     <%=label_tag :from%>
-    <%= text_field_tag :from, params[:from].present? ? params[:from].to_date.strftime("%d-%m-%Y") : nil, class: 'datepicker', require: true%>
+    <%= text_field_tag :from, params[:from].present? ? params[:from].to_date.strftime("%d-%m-%Y") : nil, class: 'datepicker', require: true, autocomplete: 'off' %>
     <%=label_tag :to%>
-    <%= text_field_tag :to, params[:to].present? ? params[:to].to_date.strftime("%d-%m-%Y") : nil, class: 'datepicker', required: true%>
+    <%= text_field_tag :to, params[:to].present? ? params[:to].to_date.strftime("%d-%m-%Y") : nil, class: 'datepicker', required: true, autocomplete: 'off' %>
     <button type="submit" class="btn btn-default">Filter</button>
     <%= link_to "New Invoice", new_invoice_path, class: 'btn btn-success' %>
   <%end%>
@@ -17,23 +17,25 @@
           <th scope="col">Amount</th>
         </tr>
       </thead>
-        <tbody>
-          <%@invoices.each_with_index do |invoice, index|%>
-            <tr>
-              <th scope="row"><%=index +1%></th>
-              <td><%=invoice.invoice_date.strftime("%d %b, %Y")%></td>
-              <td><%=invoice.amount%></td>
-              <td><%= link_to 'Edit', edit_invoice_path(invoice), class: 'btn btn-primary'%></td>
-              <td><%= link_to 'Destroy', invoice_path(invoice), method: :delete, class: 'btn btn-danger'%></td>
-            </tr>
-          <%end%>
-        </tbody>
-      </table>
-      <div class="total" style="text-align: right;">
-        <%= label_tag :total %>
-        <%= @total %>
-      </div>
-    <%end%>
+      <tbody>
+        <%@invoices.each_with_index do |invoice, index|%>
+          <tr>
+            <th scope="row"><%=index +1%></th>
+            <td><%=invoice.invoice_date.strftime("%d %b, %Y")%></td>
+            <td><%=invoice.amount%></td>
+            <td><%= link_to 'Edit', edit_invoice_path(invoice), class: 'btn btn-primary'%></td>
+            <td><%= link_to 'Destroy', invoice_path(invoice), method: :delete, class: 'btn btn-danger'%></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+    <div class="total" style="text-align: right;">
+      <%= label_tag :total %>
+      <%= @total %>
+    </div>
+  <% else %>
+    <h3>No Records Found</h3>
+  <%end%>
 </div>
 
 <script type="text/javascript">
