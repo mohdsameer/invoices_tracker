@@ -6,7 +6,7 @@
     <%=label_tag :to%>
     <%= text_field_tag :to, params[:to].present? ? params[:to].to_date.strftime("%d-%m-%Y") : nil, class: 'datepicker', required: true, autocomplete: 'off' %>
     <button type="submit" class="btn btn-default">Filter</button>
-    <%= link_to "New Invoice", new_invoice_path, class: 'btn btn-success' %>
+    <%= link_to "New Invoice", new_invoice_path, class: 'btn btn-success' ,style: "float: right;" %>
   <%end%>
   <%unless @invoices.blank?%>
     <table class="table">
@@ -22,7 +22,7 @@
           <tr>
             <th scope="row"><%=index +1%></th>
             <td><%=invoice.invoice_date.strftime("%d %b, %Y")%></td>
-            <td><%=invoice.amount%></td>
+            <td><%=invoice.amount.round(2) %></td>
             <td><%= link_to 'Edit', edit_invoice_path(invoice), class: 'btn btn-primary'%></td>
             <td><%= link_to 'Destroy', invoice_path(invoice), method: :delete, class: 'btn btn-danger'%></td>
           </tr>
@@ -30,7 +30,7 @@
       </tbody>
     </table>
     <div class="total" style="text-align: right;">
-      <%= label_tag :total %>
+      <%= label_tag :aggregate_total %>
       <%= @total %>
     </div>
   <% else %>

@@ -11,7 +11,7 @@ class InvoicesController < ApplicationController
     else
       @invoices = Invoice.all.order('invoice_date DESC')
     end
-    @total = Invoice.total_for(@invoices.pluck(:id))
+    @total = Invoice.total_for(@invoices.pluck(:id)).round(2)
   end
 
   def create
