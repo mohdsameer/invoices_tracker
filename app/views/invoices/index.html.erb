@@ -1,5 +1,5 @@
 <div class="container">
-  <center><h1>Lists of invoices</h1></center>
+  <center><h1>List of invoices</h1></center>
   <%= form_tag invoices_path, method: :get do%>
     <%=label_tag :from%>
     <%= text_field_tag :from, params[:from].present? ? params[:from].to_date.strftime("%d-%m-%Y") : nil, class: 'datepicker', required: true, autocomplete: 'off' %>

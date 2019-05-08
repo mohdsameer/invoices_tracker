@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_action :get_invoice, only: [:edit, :update, :show, :destroy]
+  before_action :get_invoice, only: [:edit, :update, :destroy]
 
   def new
     @invoice = Invoice.new
@@ -11,7 +11,7 @@ class InvoicesController < ApplicationController
     else
       @invoices = Invoice.all.order('invoice_date DESC')
     end
-    @total = Invoice.total_for(@invoices.pluck(:id)).round(2)
+    @total = Invoice.total.round(2)
   end
 
   def create
@@ -23,9 +23,6 @@ class InvoicesController < ApplicationController
       flash[:notice] = invoice.errors.full_messages.to_sentence
       render action: "new"
     end
-  end
-
-  def show
   end
 
   def edit
@@ -43,12 +40,11 @@ class InvoicesController < ApplicationController
 
   def destroy
     if @invoice.destroy
-      flash[:notice] = "Invoice destroyed successfully"
-      redirect_to invoices_path
+      flash[:notice] = "Invoice deleted successfully"
     else
       flash[:notice] = @invoice.errors.full_messages.to_sentence
-      redirect_to invoices_path
     end
+    redirect_to invoices_path
   end
 
   private
@@ -58,6 +54,6 @@ class InvoicesController < ApplicationController
   end
 
   def get_invoice
-    @invoice = Invoice.find(params[:id])
+    @invoice ||= Invoice.find(params[:id])
   end
 end
