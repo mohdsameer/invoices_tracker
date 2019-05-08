@@ -6,7 +6,11 @@ class InvoicesController < ApplicationController
   end
 
   def index
-    @invoices = Invoice.all
+    if params[:from].present? && params[:to].present?
+      @invoices = Invoice.filter(params[:from], params[:to])
+    else
+      @invoices = Invoice.all
+    end
   end
 
   def create
